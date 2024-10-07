@@ -9,30 +9,33 @@ from keras import callbacks
 
 from BSL_Translator.helper import normalize_expressions, normalize_labels, number_classes
 
-EPOCHS = 130
+def train_and_save_model(EPOCHS = 130, savePath = 'BSL_Expressions.keras'):
+    data_dict = pickle.load(open('expressions.pickle', 'rb'))
 
-data_dict = pickle.load(open('expressions.pickle', 'rb'))
+    expressions = normalize_expressions(data_dict['expressions'])
+    labels = normalize_labels(data_dict['labels'])
 
-expressions = normalize_expressions(data_dict['expressions'])
-labels = normalize_labels(data_dict['labels'])
+    num_classes = number_classes(labels)
 
-num_classes = number_classes(labels)
+    X_train, X_test, y_train, y_test = train_test_split(expressions, labels)
 
-X_train, X_test, y_train, y_test = train_test_split(expressions, labels)
+    classifier = get_model(num_classes)
 
-classifier = get_model(num_classes)
+    es = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
 
-es = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
+    classifier.summary()
 
-classifier.summary()
+    classifier.fit(X_train, y_train, epochs=EPOCHS, callbacks=[es])
 
-classifier.fit(X_train, y_train, epochs=EPOCHS, callbacks=[es])
+    classifier.evaluate(X_test, y_test)
 
-classifier.evaluate(X_test, y_test)
+    predictions = classifier.predict(X_test)
 
-predictions = classifier.predict(X_test)
+    print(predictions)
 
-print(predictions)
+    classifier.save(savePath)
 
-classifier.save('BSL_Expressions.keras')
+if __name__ == '__main__':
+    train_and_save_model()
+
 
