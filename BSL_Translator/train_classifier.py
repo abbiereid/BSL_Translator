@@ -4,10 +4,10 @@ import pickle
 
 from keras.src.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
-from model import get_model
+from BSL_Translator.model import get_model
 from keras import callbacks
 
-from helper import normalize_expressions, normalize_labels, number_classes
+from BSL_Translator.helper import normalize_expressions, normalize_labels, number_classes
 
 EPOCHS = 130
 
