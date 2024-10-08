@@ -1,7 +1,7 @@
-import train_classifier
-import test_classifier
-import expression_capture
-import dataset_creator
+from . import train_classifier
+from . import test_classifier
+from . import expression_capture
+from . import dataset_creator
 
 def build():
     expression_capture.expression_capture()
