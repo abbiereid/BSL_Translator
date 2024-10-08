@@ -35,7 +35,5 @@ def train_and_save_model(EPOCHS = 130, savePath = 'BSL_Expressions.keras'):
 
     classifier.save(savePath)
 
-if __name__ == '__main__':
-    train_and_save_model()
 
 
