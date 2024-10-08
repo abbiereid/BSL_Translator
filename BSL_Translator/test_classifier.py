@@ -11,6 +11,8 @@ def test_model():
 
     # Path where all the data is stored
     DATA_PATH = "./test"
+    if not os.path.exists(DATA_PATH):
+        os.makedirs(DATA_PATH)
 
     expressions = []
     dir = []

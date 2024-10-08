@@ -5,6 +5,8 @@ import mediapipe as mp
 def expression_capture():
     # Path where all the images will be stored
     IMG_PATH = "./test/0"
+    if not os.path.exists(IMG_PATH):
+        os.makedirs(IMG_PATH)
 
     # Defining some constants
     WAIT_FRAMES = 5

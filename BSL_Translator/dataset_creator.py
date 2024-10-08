@@ -9,6 +9,8 @@ def create_dataset():
 
     # Path where all the data is stored
     DATA_PATH = "./data"
+    if not os.path.exists(DATA_PATH):
+        os.makedirs(DATA_PATH)
 
     expressions = []
     labels = []
